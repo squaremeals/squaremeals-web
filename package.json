@@ -1,0 +1,24 @@
+{
+  "name": "SquareMeals",
+  "version": "0.0.0",
+  "server": false,
+  "private": true,
+  "scripts": {
+    "test": "",
+    "build": ""
+  },
+  "dependencies": {
+    "turbo360": "^1.5.11",
+    "vertex360": "latest"
+  },
+  "devDependencies": {
+    "express": "latest",
+    "nodemon": "latest",
+    "rimraf": "latest"
+  },
+  "app": "5a230ecf5c3edc001461aacc",
+  "deploy": [
+    "."
+  ],
+  "format": "vertex"
+}

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-US">
+{{>head}}
+<!-- Specific Styles -->
+<link rel="stylesheet" type="text/css" href="https://cdn.turbo360-vertex.com/squaremeals-hdmqb6/public/css/dashboard.css">
+
+<body>
+	<nav>
+		<ul>
+			<li id="logo">
+				<a href="/">
+					<img src="https://cdn.turbo360-vertex.com/squaremeals-hdmqb6/public/images/SquareMeal.png" height="92">
+					Square<em>Meals</em>
+				</a>
+			</li>
+			<li id="user">
+				<img src="https://cdn.turbo360-vertex.com/squaremeals-hdmqb6/public/images/user.png" height="64">
+				<label>{{ user.name }}</label>
+				{{#user.goal}}
+				<span>wants to {{ user.goal }} weight</span>
+				{{/user.goal}}
+			</li>
+			<li class="tab">
+				<a href="/user/profile">
+					<img src="https://cdn.turbo360-vertex.com/squaremeals-hdmqb6/public/images/statistics.png" width="24">Statistics
+				</a>
+			</li>
+			<li class="active tab">
+				<a href="/user/mealplan">
+					<img src="https://cdn.turbo360-vertex.com/squaremeals-hdmqb6/public/images/meal_active.png" width="24">Meal Plan
+				</a>
+			</li>
+			<li class="tab">
+				<a href="/user/settings">
+					<img src="https://cdn.turbo360-vertex.com/squaremeals-hdmqb6/public/images/settings.png" width="24">Settings
+				</a>
+			</li>
+		</ul>
+	</nav>
+
+	<section class="secondary-nav">
+		<button class="secondary">Today</button>
+		<button>Saturday, December 9</button>
+	</section>
+	<section class="grid mealplan">
+		<div class="full-width grid-item today">
+			<label>Today's Nutrition</label>
+			<div class="calorie nutrient">
+				<h1>2,173</h1>
+				<label>Calories</label>
+			</div>
+			<div class="nutrient">
+				<h1>30g</h1>
+				<label>Protein</label>
+			</div>
+			<div class="nutrient">
+				<h1>168g</h1>
+				<label>Carbs</label>
+			</div>
+			<div class="nutrient">
+				<h1>27g</h1>
+				<label>Fats</label>
+			</div>
+			<div class="nutrient">
+				<h1>{{ user.goal }}</h1>
+				<label>Goal</label>
+			</div>
+		</div>
+		<div class="meal grid-item">
+			<img src="https://cdn.turbo360-vertex.com/squaremeals-hdmqb6/public/images/breakfast.png" height="205">
+			<div class="meal-data">
+				<div class="calories">
+					<h2>345</h2>
+					<label>Calories</label>
+				</div>
+				<div class="macronutrients">
+					<div class="macro">
+						<h3>10g</h3>
+						<label>Protein</label>
+					</div>
+					<div class="macro">
+						<h3>56g</h3>
+						<label>Carbs</label>	
+					</div>
+					<div class="macro">
+						<h3>9g</h3>
+						<label>Fats</label>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="meal grid-item">
+			<img src="https://cdn.turbo360-vertex.com/squaremeals-hdmqb6/public/images/lunch.png" height="205">
+			<div class="meal-data">
+				<div class="calories">
+					<h2>345</h2>
+					<label>Calories</label>
+				</div>
+				<div class="macronutrients">
+					<div class="macro">
+						<h3>10g</h3>
+						<label>Protein</label>
+					</div>
+					<div class="macro">
+						<h3>56g</h3>
+						<label>Carbs</label>	
+					</div>
+					<div class="macro">
+						<h3>9g</h3>
+						<label>Fats</label>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="meal grid-item">
+			<img src="https://cdn.turbo360-vertex.com/squaremeals-hdmqb6/public/images/dinner.png" height="205">
+			<div class="meal-data">
+				<div class="calories">
+					<h2>345</h2>
+					<label>Calories</label>
+				</div>
+				<div class="macronutrients">
+					<div class="macro">
+						<h3>10g</h3>
+						<label>Protein</label>
+					</div>
+					<div class="macro">
+						<h3>56g</h3>
+						<label>Carbs</label>	
+					</div>
+					<div class="macro">
+						<h3>9g</h3>
+						<label>Fats</label>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+	</section>
+
+  <!-- Turbo library imports: jQuery, Turbo CDN, sample app.js.
+  NOTE: These should be minified in a build script -->
+  <script type="text/javascript" src="https://cdn.turbo360-vertex.com/squaremeals-hdmqb6/public/js/jquery.js"></script>
+
+  <!-- For file uploading. Remove if file upload not necessry -->
+  <script type="text/javascript" src="https://cdn.turbo360-vertex.com/squaremeals-hdmqb6/public/js/dropzone.js"></script> 
+
+  <!-- Turbo CDN. Better to use CDN than to store locally. -->
+  <script type="text/javascript" src="https://cdn.turbo360-dev.com/dist/turbo.min.js"></script>
+
+  <!-- Your app specific code -->
+  <script type="text/javascript" src="https://cdn.turbo360-vertex.com/squaremeals-hdmqb6/public/js/app.js"></script>
+
+  <script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js"></script>
+</body>
+</html>

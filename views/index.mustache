@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-US">
+{{>head}}
+<!-- Specific Styles -->
+<style type="text/css">
+	body {
+		display: flex;
+		flex-direction: column;
+		font-size: 16px;
+		align-items: center;
+	}
+	nav {
+		left: 0;
+		padding: 40px 0;
+		position: absolute;
+		width: 100%;
+		z-index: 0;
+	}
+	nav ul {
+		list-style-type: none;
+		padding: 0 60px;
+		z-index: 1;
+	}
+	nav ul li {
+		display: inline-block;
+		float: right;
+		z-index: 1;
+	}
+	nav #logo {
+		float: left;
+		font-size: 24px;
+		font-weight: 100;
+		letter-spacing: 10px;
+		text-transform: uppercase;
+	}
+	nav #logo em {
+		font-style: normal;
+		font-weight: bold;
+	}
+	nav::after {
+	  position: absolute;
+	  top: 0;
+	  right: 0;
+	  content: "";
+	  width: 549px;
+	  height: 190px;
+	  background: url("https://cdn.turbo360-vertex.com/squaremeals-hdmqb6/public/images/chip.png");
+	  background-repeat: no-repeat;
+	  z-index: -1;
+	}
+	header, section {
+		align-items: center;
+		display: flex;
+		justify-content: center;
+		padding: 50px 16%;
+		width: 100%;
+	}
+	header {	
+		background-color: #F6F7F9;
+		height: 95vh;
+	}
+	header::after {
+		position: absolute;
+	  bottom: -18px;
+	  right: 0;
+	  content: "";
+	  width: 870px;
+	  height: 337px;
+	  background: url("/images/chip3.png");
+	  background-repeat: no-repeat;
+	  z-index: 0;
+	}
+	header div,
+	section div { max-width: 480px; }
+	header img,
+	section img {
+		margin: 0 60px;
+		/*padding-top: 100px;*/
+		z-index: 1;
+	}
+	.app-information {
+		min-height: 785px;
+		position: relative;
+	}
+	.app-information::before {
+		position: absolute;
+	  top: -196px;
+	  left: 0;
+	  content: "";
+	  width: 513px;
+	  height: 965px;
+	  background: url("https://cdn.turbo360-vertex.com/squaremeals-hdmqb6/public/images/chip2.png");
+	  background-repeat: no-repeat;
+	  z-index: 1;
+	}
+	.app-information img {
+		transform: rotate(-7deg);
+	}
+	section .callout-description {
+		text-align: right;
+	}
+	.call-to-action {
+		background-color: #F6F7F9;
+    padding: 150px 0;
+	}
+	.call-to-action h1 { margin-top: 0; }
+	.call-to-action img { padding: 0; }
+	footer {
+		align-items: flex-start;
+		display: flex;
+		justify-content: center;
+	}
+	footer div { padding: 60px; }
+	footer div ul {
+		list-style-type: none;
+		text-align: center;
+	}
+	footer div ul label {
+		padding: 10px 0;
+		text-transform: uppercase;
+	}
+	footer div ul li { padding: 10px 0; }
+	footer div .social {
+		padding: 40px 0;
+		text-align: center;
+	}
+	footer div .social label {
+		display: block;
+		font-weight: 100;
+		padding: 20px 0;
+	}
+</style>
+<style type="text/css">
+	.overlay {
+		background-color: rgba(239, 239, 244, 0.7);
+		height: 100%;
+		left: 0;
+		opacity: 0;
+		overflow: hidden;
+		position: fixed;
+		top: 0;
+		visibility: hidden;
+		width: 100vw;
+		z-index: 1000;
+
+		-webkit-transition: all 1s;
+		transition: all 1s;
+	}
+	.login-modal {
+		background-color: #FFFFFF;
+		border-radius: 10px;
+		margin: 150px auto;
+		padding: 30px;
+		width: 33%;
+		z-index: 1001;
+	}
+	.login-modal input {
+		background-color: #F6F7F9;
+	}
+</style>
+<body>
+	<div class="overlay">
+		<div class="login-modal">
+			<h1>Login</h1>
+			<form action="/auth/login" method="post">
+				<input type="email" name="email" placeholder="Email Address" required>
+				<input type="password" name="password" placeholder="Password" required>
+				<button type="submit">Login</button>
+				<button type="button" class="secondary" onclick="dismiss()">Cancel</button>
+			</form>
+		</div>
+	</div>
+
+	<nav>
+		<ul>
+			<li id="logo">Square<em>Meals</em></li>
+			<li>
+				<a href="#signup"><button>Sign Up</button></a>
+			</li>
+		</ul>
+	</nav>
+
+	<header>
+		<div class="callout-description">
+			<h1>Track your progress. Achieve your goals.</h1>
+			<p>Nutrition doesn’t need to be a chore. SquareMeals makes tracking key nutrition information easy, to help you achieve your goals. Learn what to eat and how to power your life through nutrition.</p>
+			<button>Learn More</button>
+		</div>
+		<img src="https://cdn.turbo360-vertex.com/squaremeals-hdmqb6/public/images/MealPlan.png" width="293">
+	</header>
+
+	<section class="app-information">
+		<img src="https://cdn.turbo360-vertex.com/squaremeals-hdmqb6/public/images/MealPlan.png" width="293">
+		<div class="callout-description">
+			<h1>Track your progress. Achieve your goals.</h1>
+			<p>Nutrition doesn’t need to be a chore. SquareMeals makes tracking key nutrition information easy, to help you achieve your goals. Learn what to eat and how to power your life through nutrition.</p>
+		</div>
+	</section>
+
+	<section class="call-to-action" id="signup">
+		<div>
+			<h1>Sign up today.</h1>
+			<p>Start taking control of your nutrition today! Sign up below.</p>
+			<form action="/auth/register" method="post">
+				<input type="text" name="name" placeholder="Full Name" required>
+				<input type="email" name="email" placeholder="Email Address" required>
+				<input type="password" name="password" placeholder="Password" required>
+				<button type="submit">Sign Up</button>
+				<button type="button" class="secondary" onclick="modal()">Login</button>
+			</form>
+		</div>
+		<img src="https://cdn.turbo360-vertex.com/squaremeals-hdmqb6/public/images/icon.png" width="200">
+	</section>
+
+	<footer>
+		<div>
+			<div class="social">
+				<img src="https://cdn.turbo360-vertex.com/squaremeals-hdmqb6/public/images/snapchat.png" height="32">
+				<label>1.2K</label>
+			</div>
+			<ul>
+				<label>Social</label>
+				<li>Instagram</li>
+				<li>Snapchat</li>
+				<li>YouTube</li>
+			</ul>
+		</div>
+
+		<div>
+			<div class="social">
+				<img src="https://cdn.turbo360-vertex.com/squaremeals-hdmqb6/public/images/instagram.png" height="32">
+				<label>0.7K</label>	
+			</div>
+			<ul>
+				<label>Legal</label>
+				<li>Terms of Use</li>
+				<li>Privacy Policy</li>
+			</ul>
+		</div>
+
+		<div>
+			<div class="social">
+				<img src="https://cdn.turbo360-vertex.com/squaremeals-hdmqb6/public/images/youtube.png" height="32">
+				<label>9.8K</label>
+			</div>
+			<ul>
+				<label>Contact</label>
+				<li>Support</li>
+				<li>FAQ</li>
+			</ul>
+		</div>
+	</footer>
+
+  <!-- Turbo library imports: jQuery, Turbo CDN, sample app.js.
+  NOTE: These should be minified in a build script -->
+  <script type="text/javascript" src="https://cdn.turbo360-vertex.com/squaremeals-hdmqb6/public/js/jquery.js"></script>
+
+  <!-- For file uploading. Remove if file upload not necessry -->
+  <script type="text/javascript" src="https://cdn.turbo360-vertex.com/squaremeals-hdmqb6/public/js/dropzone.js"></script> 
+
+  <!-- Turbo CDN. Better to use CDN than to store locally. -->
+  <script type="text/javascript" src="https://cdn.turbo360-dev.com/dist/turbo.min.js"></script>
+
+  <!-- Your app specific code -->
+  <script type="text/javascript" src="https://cdn.turbo360-vertex.com/squaremeals-hdmqb6/public/js/app.js"></script>
+
+  <script type="text/javascript">
+  	function modal() {
+  		document.getElementsByClassName('overlay')[0].style.visibility = "visible";
+  		document.getElementsByClassName('overlay')[0].style.opacity = "1";
+  	}
+  	function dismiss() {
+  		document.getElementsByClassName('overlay')[0].style.opacity = "0";	
+  		document.getElementsByClassName('overlay')[0].style.visibility = "hidden";
+  	}
+
+  	$(document).ready(function(){
+				// Select all links with hashes
+				$('a[href*="#"]')
+				  // Remove links that don't actually link to anything
+				  .not('[href="#"]')
+				  .not('[href="#0"]')
+				  .click(function(event) {
+				    // On-page links
+				    if (
+				      location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') 
+				      && 
+				      location.hostname == this.hostname
+				    ) {
+				      // Figure out element to scroll to
+				      var target = $(this.hash);
+				      target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
+				      // Does a scroll target exist?
+				      if (target.length) {
+				        // Only prevent default if animation is actually gonna happen
+				        event.preventDefault();
+				        $('html, body').animate({
+				          scrollTop: target.offset().top
+				        }, 1000, function() {
+				          // Callback after animation
+				          // Must change focus!
+				          var $target = $(target);
+				          $target.focus();
+				          if ($target.is(":focus")) { // Checking if the target was focused
+				            return false;
+				          } else {
+				            $target.attr('tabindex','-1'); // Adding tabindex for elements not focusable
+				            $target.focus(); // Set focus again
+				          };
+				        });
+				      }
+				    }
+				  });
+			 });
+  </script>
+</body>
+</html>

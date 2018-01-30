@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-US">
+{{>head}}
+<!-- Specific Styles -->
+<link rel="stylesheet" type="text/css" href="https://cdn.turbo360-vertex.com/squaremeals-hdmqb6/public/css/dashboard.css">
+
+<body>
+	<nav>
+		<ul>
+			<li id="logo">
+				<a href="/">
+					<img src="https://cdn.turbo360-vertex.com/squaremeals-hdmqb6/public/images/SquareMeal.png" height="92">
+					Square<em>Meals</em>
+				</a>
+			</li>
+			<li id="user">
+				<img src="https://cdn.turbo360-vertex.com/squaremeals-hdmqb6/public/images/user.png" height="64">
+				<label>{{ user.name }}</label>
+				{{#user.goal}}
+				<span>wants to {{ user.goal }} weight</span>
+				{{/user.goal}}
+			</li>
+			<li class="active tab">
+				<a href="/user/profile">
+					<img src="https://cdn.turbo360-vertex.com/squaremeals-hdmqb6/public/images/statistics_active.png" width="24">Statistics
+				</a>
+			</li>
+			<li class="tab">
+				<a href="/user/mealplan">
+					<img src="https://cdn.turbo360-vertex.com/squaremeals-hdmqb6/public/images/meal.png" width="24">Meal Plan
+				</a>
+			</li>
+			<li class="tab">
+				<a href="/user/settings">
+					<img src="https://cdn.turbo360-vertex.com/squaremeals-hdmqb6/public/images/settings.png" width="24">Settings
+				</a>
+			</li>
+		</ul>
+	</nav>
+
+	<section class="secondary-nav">
+		<button class="secondary">Today</button>
+		<button>Saturday, December 9</button>
+	</section>
+	<section class="grid" data-isotope='{ "itemSelector": ".grid-item", "percent-position": true }'>
+		<div class="profile grid-item">
+			<img src="https://cdn.turbo360-vertex.com/squaremeals-hdmqb6/public/images/profile.png" height="120">
+			<h2>{{ user.name }}</h2>
+			{{#user.goal}}
+			<span>wants to {{ user.goal }} weight</span>
+			{{/user.goal}}
+		</div>
+		<div class="grid-item double">
+			<label>Weight over Time</label>
+			<canvas id="weight-graph" width="1032" height="500"></canvas>
+		</div>
+		<div class="weight grid-item">
+			<label>Current Weight</label>
+			<h2>{{ user.weight }}</h2>
+			<img src="https://cdn.turbo360-vertex.com/squaremeals-hdmqb6/public/images/triangle.png" height="26">
+			<h2 class="delta">10</h2>
+		</div>
+		<div class="meal grid-item">
+			<label>Favorite Meal</label>
+			<img src="https://cdn.turbo360-vertex.com/squaremeals-hdmqb6/public/images/breakfast.png" height="205">
+			<div class="meal-data">
+				<div class="calories">
+					<h2>345</h2>
+					<label>Calories</label>
+				</div>
+				<div class="macronutrients">
+					<div class="macro">
+						<h3>10g</h3>
+						<label>Protein</label>
+					</div>
+					<div class="macro">
+						<h3>56g</h3>
+						<label>Carbs</label>	
+					</div>
+					<div class="macro">
+						<h3>9g</h3>
+						<label>Fats</label>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="grid-item">
+			<label>Nutrition Breakdown</label>
+			<canvas id="nutrient-graph" width="400" height="400"></canvas>
+		</div>
+		
+		
+	</section>
+
+  <!-- Turbo library imports: jQuery, Turbo CDN, sample app.js.
+  NOTE: These should be minified in a build script -->
+  <script type="text/javascript" src="https://cdn.turbo360-vertex.com/squaremeals-hdmqb6/public/js/jquery.js"></script>
+
+  <!-- For file uploading. Remove if file upload not necessry -->
+  <script type="text/javascript" src="https://cdn.turbo360-vertex.com/squaremeals-hdmqb6/public/js/dropzone.js"></script> 
+
+  <!-- Turbo CDN. Better to use CDN than to store locally. -->
+  <script type="text/javascript" src="https://cdn.turbo360-dev.com/dist/turbo.min.js"></script>
+
+  <!-- Your app specific code -->
+  <script type="text/javascript" src="https://cdn.turbo360-vertex.com/squaremeals-hdmqb6/public/js/app.js"></script>
+
+  <script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
+  <script type="text/javascript">
+  	var ctx = document.getElementById("nutrient-graph").getContext('2d');
+	var nutrition = new Chart(ctx, {
+	    type: 'doughnut',
+	    data: {
+	        labels: ["Carbs", "Fats", "Protein"],
+	        datasets: [{
+	            label: 'Nutrient Intake',
+	            data: [310, 67, 200],
+	            backgroundColor: [
+	                'rgba(255, 99, 132, 0.2)',
+	                'rgba(54, 162, 235, 0.2)',
+	                'rgba(255, 206, 86, 0.2)',
+	                'rgba(75, 192, 192, 0.2)',
+	                'rgba(153, 102, 255, 0.2)',
+	                'rgba(255, 159, 64, 0.2)'
+	            ]
+	        }]
+	    },
+	    options: {
+	        cutoutPercentage: 50,
+	        legend: {
+	        	display: false
+	        }
+	    }
+	});
+
+	var ctx = document.getElementById("weight-graph").getContext('2d');
+	var nutrition = new Chart(ctx, {
+	    type: 'line',
+	    data: {
+	        // labels: ["Carbs", "Fats", "Protein"],
+	        datasets: [{
+	            label: 'Weight',
+	            data: [190, 188, 183, 185, 182, 180],
+	            borderColor: '#78AEED',
+	            fill: false,
+	            borderWidth: 4,
+	            pointRadius: 6,
+	            pointBorderWidth: 3,
+	            pointBorderColor: '#FFFFFF',
+	            pointBackgroundColor: '#4A90E2'
+	        }]
+	    },
+	    options: {
+		    scales: {
+		        xAxes: [{
+		            type: 'category',
+		            gridLines: { display: false, drawBorder: false },
+		            labels: ['January', 'February', 'March', 'April', 'May', 'June'],
+		        }],
+		        yAxes: [{
+		        	gridLines: { display: false, drawBorder: false },
+		        	ticks: {
+		        		callback: function () {
+		        			return null;
+		        		}
+		        	}
+		        }]
+		    },
+		    legend: {
+	        	display: false
+	        }
+    }
+	});
+  </script>
+</body>
+</html>

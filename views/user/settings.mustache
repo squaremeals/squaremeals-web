@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-US">
+{{>head}}
+<!-- Specific Styles -->
+<link rel="stylesheet" type="text/css" href="https://cdn.turbo360-vertex.com/squaremeals-hdmqb6/public/css/dashboard.css">
+
+<body>
+	<nav>
+		<ul>
+			<li id="logo">
+				<a href="/">
+					<img src="https://cdn.turbo360-vertex.com/squaremeals-hdmqb6/public/images/SquareMeal.png" height="92">
+					Square<em>Meals</em>
+				</a>
+			</li>
+			<li id="user">
+				<img src="https://cdn.turbo360-vertex.com/squaremeals-hdmqb6/public/images/user.png" height="64">
+				<label>{{ user.name }}</label>
+				{{#user.goal}}
+				<span>wants to {{ user.goal }} weight</span>
+				{{/user.goal}}
+			</li>
+			<li class="tab">
+				<a href="/user/profile">
+					<img src="https://cdn.turbo360-vertex.com/squaremeals-hdmqb6/public/images/statistics.png" width="24">Statistics
+				</a>
+			</li>
+			<li class="tab">
+				<a href="/user/mealplan">
+					<img src="https://cdn.turbo360-vertex.com/squaremeals-hdmqb6/public/images/meal.png" width="24">Meal Plan
+				</a>
+			</li>
+			<li class="active tab">
+				<a href="/user/settings">
+					<img src="https://cdn.turbo360-vertex.com/squaremeals-hdmqb6/public/images/settings_active.png" width="24">Settings
+				</a>
+			</li>
+		</ul>
+	</nav>
+
+	<section class="grid" data-isotope='{ "itemSelector": ".grid-item", "percent-position": true }'>
+		<div class="metadata grid-item" style="background-color: #78AEED; color: #FFFFFF">
+			<img src="https://cdn.turbo360-vertex.com/squaremeals-hdmqb6/public/images/scale.png" height="100">
+			<h2>Weight</h2>
+			<span>Please enter your weight in pounds.</span>
+			<input type="number" name="weight" placeholder="Weight" style="color: #707379">
+		</div>
+		<div class="metadata grid-item">
+			<img src="https://cdn.turbo360-vertex.com/squaremeals-hdmqb6/public/images/height.png" height="100">
+			<h2>Height</h2>
+			<span>Please enter your height.</span>
+			<select style="width: 40%; display: inline" id="feet">
+				<option value="4">4</option>
+				<option value="5">5</option>
+				<option value="6">6</option>
+			</select>
+			ft
+			<select style="width: 40%; display: inline" id="inches">
+				<option value="0">0</option>
+				<option value="1">1</option>
+				<option value="2">2</option>
+				<option value="3">3</option>
+				<option value="4">4</option>
+				<option value="5">5</option>
+				<option value="6">6</option>
+				<option value="7">7</option>
+				<option value="8">8</option>
+				<option value="9">9</option>
+				<option value="10">10</option>
+				<option value="11">11</option>
+			</select>
+			in
+			<!-- <input type="number" name="height" placeholder="Height"> -->
+		</div>
+		<div class="metadata grid-item" style="background-color: #74777C; color: #FFFFFF">
+			<img src="https://cdn.turbo360-vertex.com/squaremeals-hdmqb6/public/images/age.png" height="100">
+			<h2>Age</h2>
+			<input type="number" name="age" placeholder="Age" style="color: #707379">
+		</div>
+		<div class="metadata grid-item">
+			<h2>Activity Level</h2>
+			<span>This is defined by your activity level. A sedentary job and minimal exercises is lower on the scale and an active job plus exercise is higher on the scale.</span>
+			<form>
+				<input type="range" name="activity level" min="1" max="5" step="1" list="tickmarks">
+				<datalist id="tickmarks">
+				  <option value="1" label="Sedentary">
+				  <option value="2">
+				  <option value="3" label="Active">
+				  <option value="4">
+				  <option value="5" label="Very Active">
+				</datalist>
+			</form>
+		</div>
+		<div class="metadata grid-item">
+			<img src="https://cdn.turbo360-vertex.com/squaremeals-hdmqb6/public/images/gender.png" height="100">
+			<h2>Gender</h2>
+			<select>
+				<option value="male">Male</option>
+				<option value="female">Female</option>
+			</select>
+		</div>
+		<div class="metadata grid-item">
+			<h2>Goal</h2>
+			<span>Select a goal from the list.</span>
+			<select id="goal">
+				<option value="lose">Lose Weight</option>
+				<option value="maintain">Maintain</option>
+				<option value="gain">Gain Weight</option>
+			</select>
+		</div>
+		<div class="metadata grid-item">
+			<button id="update" onclick="updateUser()">Update</button>
+		</div>
+	</section>
+
+  <!-- Turbo library imports: jQuery, Turbo CDN, sample app.js.
+  NOTE: These should be minified in a build script -->
+  <script type="text/javascript" src="https://cdn.turbo360-vertex.com/squaremeals-hdmqb6/public/js/jquery.js"></script>
+
+  <!-- For file uploading. Remove if file upload not necessry -->
+  <script type="text/javascript" src="https://cdn.turbo360-vertex.com/squaremeals-hdmqb6/public/js/dropzone.js"></script> 
+
+  <!-- Turbo CDN. Better to use CDN than to store locally. -->
+  <script type="text/javascript" src="https://cdn.turbo360-dev.com/dist/turbo.min.js"></script>
+
+  <!-- Your app specific code -->
+  <script type="text/javascript" src="https://cdn.turbo360-vertex.com/squaremeals-hdmqb6/public/js/app.js"></script>
+
+  <script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js"></script>
+
+  <script type="text/javascript">
+  	function updateUser(e) {
+  		data = {
+  			age: $('input[name="age"]').val(),
+  			weight: $('input[name="weight"]').val(),
+  			height: {
+  				feet: $('#feet').val(),
+  				inches: $('#inches').val()
+  			},
+  			'activity level': $('input[name="activity level"]').val(),
+  			goal: $('#goal').val()
+  		}
+  		
+  		$.post("/auth/update", { data: JSON.stringify(data) }, function(data){
+  			if (data.confirmation === 'success') {
+  				window.location.href = "/auth/currentuser";
+  			}
+  		})
+  	}
+  </script>
+</body>
+</html>
