@@ -46,19 +46,19 @@
 		<div class="full-width grid-item today">
 			<label>Today's Nutrition</label>
 			<div class="calorie nutrient">
-				<h1>2,173</h1>
+				<h1>{{ calories }}</h1>
 				<label>Calories</label>
 			</div>
 			<div class="nutrient">
-				<h1>30g</h1>
+				<h1>{{ protein }}g</h1>
 				<label>Protein</label>
 			</div>
 			<div class="nutrient">
-				<h1>168g</h1>
+				<h1>{{ carbs }}g</h1>
 				<label>Carbs</label>
 			</div>
 			<div class="nutrient">
-				<h1>27g</h1>
+				<h1>{{ fats }}g</h1>
 				<label>Fats</label>
 			</div>
 			<div class="nutrient">
@@ -66,6 +66,32 @@
 				<label>Goal</label>
 			</div>
 		</div>
+		{{#meals}}
+		<div class="meal grid-item">
+			<img src="{{image}}" height="205">
+			<div class="meal-data">
+				<div class="calories">
+					<h2>{{calories}}</h2>
+					<label>Calories</label>
+				</div>
+				<div class="macronutrients">
+					<div class="macro">
+						<h3>{{protein}}g</h3>
+						<label>Protein</label>
+					</div>
+					<div class="macro">
+						<h3>{{carbs}}g</h3>
+						<label>Carbs</label>	
+					</div>
+					<div class="macro">
+						<h3>{{fats}}g</h3>
+						<label>Fats</label>
+					</div>
+				</div>
+			</div>
+		</div>
+		{{/meals}}
+		<!-- 
 		<div class="meal grid-item">
 			<img src="https://cdn.turbo360-vertex.com/squaremeals-hdmqb6/public/images/breakfast.png" height="205">
 			<div class="meal-data">
@@ -135,7 +161,7 @@
 				</div>
 			</div>
 		</div>
-		
+		 -->
 	</section>
 
   <!-- Turbo library imports: jQuery, Turbo CDN, sample app.js.
@@ -152,5 +178,17 @@
   <script type="text/javascript" src="https://cdn.turbo360-vertex.com/squaremeals-hdmqb6/public/js/app.js"></script>
 
   <script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js"></script>
+
+  <script type="text/javascript">
+  	let user = {}
+  	let feet = '{{ user.height.feet }}'
+  	let inches = '{{ user.height.inches }}'
+  	
+  	user.height = (parseInt(feet)*12 + parseInt(inches))*2.54 // CM
+  	user.weight = parseInt('{{ user.weight }}')*0.453592 // KG
+  	user.age = parseInt('{{ user.age }}')
+  	
+  	console.log(user);
+  </script>
 </body>
 </html>
