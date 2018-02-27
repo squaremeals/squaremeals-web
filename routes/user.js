@@ -57,10 +57,22 @@ router.get('/profile', function(req, res){
 		return
 	}
 	turbo.fetchOne('user', req.vertexSession.user.id)
-	.then(data => {
+	.then(user => {
+		let height = (parseInt(user.height.feet)*12 + parseInt(user.height.inches))*2.54
+		let weight = parseInt(user.weight)*0.453592
+		return [user, controllers.meal.mealplan(height, weight, parseInt(user.age), 'male', user.goal, parseInt(user['activity level']), 3)]
+	})
+	.spread((user, mealplan) => {
+		let nutrition = []
+		nutrition.push(mealplan.carbs)
+		nutrition.push(mealplan.fats)
+		nutrition.push(mealplan.protein)
+
 		res.render('user/profile', {
 			confirmation: 'success',
-			user: data
+			user: user,
+			weightlog: JSON.stringify(user.weightlog),
+			nutrition: JSON.stringify(nutrition)
 		})
 	})
 	.catch(err => {
@@ -88,7 +100,6 @@ router.get('/mealplan', function(req, res){
 	}
 	turbo.fetchOne('user', req.vertexSession.user.id)
 	.then(user => {
-		// console.log(user)
 		let height = (parseInt(user.height.feet)*12 + parseInt(user.height.inches))*2.54
 		let weight = parseInt(user.weight)*0.453592
 		return [user, controllers.meal.mealplan(height, weight, parseInt(user.age), 'male', user.goal, parseInt(user['activity level']), 3)]

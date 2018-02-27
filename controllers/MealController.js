@@ -46,10 +46,10 @@ module.exports = {
 				for (i=0; i<mealsPerDay; i++){
 					if (data[i].calories < calPerMeal) {
 						mealplan.push(data[i])
-						totalCalories+=data[i].calories;
-						totalProtein+=data[i].protein;
-						totalCarbs+=data[i].carbs;
-						totalFats+=data[i].fats;
+						totalCalories+=parseInt(data[i].calories);
+						totalProtein+=parseInt(data[i].protein);
+						totalCarbs+=parseInt(data[i].carbs);
+						totalFats+=parseInt(data[i].fats);
 					}
 					if (mealplan.length == mealsPerDay) resolve({ meals: mealplan, msj: msj, tdee: Math.floor(tdee).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","), calories: totalCalories, protein: totalProtein, carbs: totalCarbs, fats: totalFats })
 				}

@@ -120,6 +120,12 @@ section {
     padding-top: 20px;
     background-color: transparent;
 }
+.grid .grid-item.meal img {
+	border-radius: 8px;
+    object-fit: cover;
+    width: 100%;
+    height: 205px;
+}
 .meal > label {
 	color: #FFFFFF;
 	font-size: 20px;
@@ -188,15 +194,23 @@ section {
 	margin: 0 5px;
 	margin-top: 10px;
 }
+.weight.negative img {
+	-moz-transform: scaleY(-1);
+    -o-transform: scaleY(-1);
+    -webkit-transform: scaleY(-1);
+    transform: scaleY(-1);
+    filter: FlipV;
+    -ms-filter: "FlipV";
+}
 .weight h2 {
 	color: #171D25;
 	display: inline-block;
 	font-size: 36px;
 	font-weight: bold;
 }
-.weight .delta {
-	color: #50E3C2;
-}
+.weight .delta { color: #50E3C2; }
+/*.weight.positive .delta { color: ; }*/
+/*.weight.negative .delta { color: ; }*/
 
 .grid .grid-item.profile {
 	text-align: center;

@@ -110,4 +110,41 @@ router.post('/update', function(req, res){
 	})
 });
 
+router.post('/update/weight', function(req, res){
+	if (req.vertexSession == null) {
+		res.json({
+			confirmation: 'success',
+			user: null
+		})
+		return
+	}
+	if (req.vertexSession.user == null) {
+		res.json({
+			confirmation: 'success',
+			user: null
+		})
+		return
+	}
+
+	turbo.fetchOne('user', req.vertexSession.user.id)
+	.then(user => {
+		let weightlog = user.weightlog || {}
+		weightlog[req.body.date] = req.body.weight
+
+		return turbo.updateUser(user.id, { weightlog: weightlog })
+	})
+	.then(data => {
+		res.json({
+			confirmation: 'success',
+			user: data
+		})
+	})
+	.catch(err => {
+		res.json({
+			confirmation: 'fail',
+			message: err.message
+		})
+	})
+});
+
 module.exports = router;
